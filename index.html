@@ -25,7 +25,6 @@
       color:#fff;
     }
 
-    /* Header */
     header{
       position:sticky; top:0; z-index:10;
       background:rgba(11,11,16,.88);
@@ -53,6 +52,37 @@
       background:rgba(255,255,255,.04);
       color:#fff;
       outline:none;
+    }
+
+    /* Sections */
+    .section{max-width:1100px; margin:0 auto; padding:18px 14px}
+    .section-title{
+      margin:0 0 12px;
+      color:var(--gold);
+      font-size:18px;
+      font-weight:950;
+      letter-spacing:.3px;
+    }
+    .panel{
+      background:linear-gradient(180deg,var(--cardA),var(--cardB));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 16px 40px rgba(0,0,0,.35);
+    }
+    .desc{
+      margin:0;
+      color:#fff;
+      opacity:.92;
+      line-height:1.7;
+      font-size:14px;
+    }
+    .bullets{
+      margin:12px 0 0;
+      padding:0 18px 0 0;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:13px;
     }
 
     /* Cars */
@@ -102,49 +132,23 @@
       color:var(--muted);
     }
 
-    /* Reviews slider */
-    .rev{padding:42px 14px}
-    .rev-wrap{max-width:1100px;margin:0 auto}
-    .rev-title{
-      margin:0 0 16px;
-      color:var(--gold);
-      font-size:18px;
-      font-weight:950;
-      letter-spacing:.3px;
+    /* Static reviews */
+    .reviews-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:14px;
+      margin-top:12px;
     }
-    .rev-box{
+    .review{
       background:linear-gradient(180deg,var(--cardA),var(--cardB));
       border:1px solid var(--line);
       border-radius:18px;
-      overflow:hidden;
-      box-shadow:0 16px 40px rgba(0,0,0,.35);
+      padding:16px;
+      box-shadow:0 16px 40px rgba(0,0,0,.25);
     }
-    .rev-track{
-      display:flex;
-      transition:transform .55s ease;
-      will-change:transform;
-    }
-    .rev-card{
-      min-width:100%;
-      padding:18px 18px 22px;
-    }
-    .rev-stars{color:var(--mint); font-weight:950; letter-spacing:2px; margin-bottom:10px}
-    .rev-text{margin:0 0 12px; opacity:.92; line-height:1.6; font-size:14px}
-    .rev-name{font-weight:950}
-    .rev-name span{color:var(--muted); font-weight:800}
-    .rev-dots{
-      display:flex; gap:8px; justify-content:center;
-      padding:12px 0 14px;
-      border-top:1px solid var(--line);
-      background:rgba(0,0,0,.22);
-    }
-    .rev-dot{
-      width:10px;height:10px;border-radius:50%;
-      border:1px solid rgba(255,255,255,.35);
-      background:transparent;
-      cursor:pointer;
-    }
-    .rev-dot.active{background:var(--gold); border-color:var(--gold)}
+    .stars{color:var(--mint); font-weight:950; letter-spacing:2px; margin-bottom:10px}
+    .rtext{margin:0 0 10px; opacity:.92; line-height:1.6; font-size:14px}
+    .rname{color:var(--muted); font-weight:800; font-size:12px}
 
     /* Floating buttons */
     .float{
@@ -185,57 +189,54 @@
   </div>
 </header>
 
+<!-- About Us -->
+<section class="section">
+  <h2 class="section-title">À propos</h2>
+  <div class="panel">
+    <p class="desc">
+      Black Diamond Cars est une agence de location de voitures premium au Maroc.
+      Nous proposons une sélection de véhicules haut de gamme, propres et bien entretenus,
+      avec un service rapide et une réservation simple via WhatsApp.
+    </p>
+    <ul class="bullets">
+      <li>Livraison possible (aéroport / hôtel) حسب الاتفاق.</li>
+      <li>Service avec chauffeur disponible pour Vans (Sprinter / Vito).</li>
+      <li>Réservation rapide: choisissez la voiture et contactez-nous مباشرة.</li>
+    </ul>
+  </div>
+</section>
+
 <main>
   <section id="grid" class="grid"></section>
 </main>
 
-<!-- Reviews slider -->
-<section class="rev">
-  <div class="rev-wrap">
-    <h2 class="rev-title">Les avis de nos clients</h2>
+<!-- Static Reviews -->
+<section class="section">
+  <h2 class="section-title">Les avis de nos clients</h2>
 
-    <div class="rev-box">
-      <div class="rev-track" id="revTrack">
+  <div class="reviews-grid">
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p class="rtext">“Service incroyable ! Voiture propre, luxueuse et livraison rapide. Je recommande.”</p>
+      <div class="rname">Jean D. – Paris, France</div>
+    </div>
 
-        <div class="rev-card">
-          <div class="rev-stars">★★★★★</div>
-          <p class="rev-text">“Service incroyable ! Voiture propre, luxueuse et livraison rapide. Je recommande.”</p>
-          <div class="rev-name">Jean D. <span>– Paris, France</span></div>
-        </div>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p class="rtext">“Très sérieux et professionnel. Réservation facile via WhatsApp, tout était parfait.”</p>
+      <div class="rname">Sophie M. – Lyon, France</div>
+    </div>
 
-        <div class="rev-card">
-          <div class="rev-stars">★★★★★</div>
-          <p class="rev-text">“Très sérieux et professionnel. Réservation facile via WhatsApp, tout était parfait.”</p>
-          <div class="rev-name">Sophie M. <span>– Lyon, France</span></div>
-        </div>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p class="rtext">“Service VIP. Range Rover impeccable. Expérience ممتازة.”</p>
+      <div class="rname">Karim B. – Casablanca, Maroc</div>
+    </div>
 
-        <div class="rev-card">
-          <div class="rev-stars">★★★★★</div>
-          <p class="rev-text">“Service VIP, Range Rover impeccable. Très bonne expérience, je reviendrai.”</p>
-          <div class="rev-name">Karim B. <span>– Casablanca, Maroc</span></div>
-        </div>
-
-        <div class="rev-card">
-          <div class="rev-stars">★★★★★</div>
-          <p class="rev-text">“Communication ممتازة، تسليم فالوقت وسيارة نظيفة بزاف. شكراً بزاف.”</p>
-          <div class="rev-name">Ahmed L. <span>– Rabat, Maroc</span></div>
-        </div>
-
-        <div class="rev-card">
-          <div class="rev-stars">★★★★★</div>
-          <p class="rev-text">“Super service, aucune surprise. Véhicule comme sur les photos. Top !”</p>
-          <div class="rev-name">Nadia R. <span>– Marseille, France</span></div>
-        </div>
-
-        <div class="rev-card">
-          <div class="rev-stars">★★★★★</div>
-          <p class="rev-text">“حجز ساهل بزاف، وخدمة محترمة. أنصح به لأي واحد باغي سيارات فخمة.”</p>
-          <div class="rev-name">Youssef A. <span>– Marrakech, Maroc</span></div>
-        </div>
-
-      </div>
-
-      <div class="rev-dots" id="revDots"></div>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p class="rtext">“حجز ساهل وخدمة محترمة. السيارات كيجيو بحال فالصور.”</p>
+      <div class="rname">Ahmed L. – Rabat, Maroc</div>
     </div>
   </div>
 </section>
@@ -249,10 +250,8 @@
 <a class="float call" href="tel:+212653654229" aria-label="Call">📞</a>
 
 <script>
-  // ===== Cars + WhatsApp message =====
   const WHATSAPP_NUMBER = "212653654229";
 
-  // ✅ same file names from your /images list
   const cars = [
     { name:"Audi Q8 s line 50 TDI", mad:2500, img:"images/2019_audi_q8_uk_108_2560x1440.jpg", details:"SUV فخم — أوتوماتيك — ديزل", tags:["SUV","Luxury"] },
     { name:"Range Rover Sport P440e hybrid", mad:4000, img:"images/New Range Rover Sport 001_vyiis9.jpg", details:"Hybrid — SUV فخم — راحة عالية", tags:["Hybrid","VIP"] },
@@ -267,7 +266,6 @@
   ];
 
   function waLink(carName){
-    // French message: only reservation + car name
     const msg = `Bonjour, je voudrais réserver la voiture : ${carName}.`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   }
@@ -302,60 +300,9 @@
       });
   }
 
-  // ===== Reviews slider =====
-  function initReviews(){
-    const track = document.getElementById("revTrack");
-    const dotsWrap = document.getElementById("revDots");
-    if(!track || !dotsWrap) return;
-
-    const cards = Array.from(track.children);
-    let i = 0;
-    let timer = null;
-
-    // dots
-    cards.forEach((_, idx) => {
-      const b = document.createElement("button");
-      b.className = "rev-dot" + (idx === 0 ? " active" : "");
-      b.addEventListener("click", () => go(idx, true));
-      dotsWrap.appendChild(b);
-    });
-
-    function setActiveDot(idx){
-      Array.from(dotsWrap.children).forEach((d, di) => d.classList.toggle("active", di === idx));
-    }
-    function go(idx, restart){
-      i = (idx + cards.length) % cards.length;
-      track.style.transform = "translateX(" + (-i * 100) + "%)";
-      setActiveDot(i);
-      if(restart) start();
-    }
-    function start(){
-      if(timer) clearInterval(timer);
-      timer = setInterval(() => go(i+1, false), 3500);
-    }
-
-    // swipe on mobile
-    let downX = null;
-    track.addEventListener("touchstart", e => { downX = e.touches[0].clientX; }, {passive:true});
-    track.addEventListener("touchend", e => {
-      if(downX == null) return;
-      const upX = e.changedTouches[0].clientX;
-      const diff = upX - downX;
-      if(Math.abs(diff) > 35){
-        if(diff > 0) go(i-1, true);
-        else go(i+1, true);
-      } else start();
-      downX = null;
-    }, {passive:true});
-
-    start();
-  }
-
-  // init
   window.addEventListener("DOMContentLoaded", () => {
     renderCars();
     document.getElementById("q").addEventListener("input", renderCars);
-    initReviews();
   });
 </script>
 
