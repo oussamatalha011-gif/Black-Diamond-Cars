@@ -1,4 +1,4 @@
-sectictypeionionerREREctype html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
@@ -12,36 +12,41 @@ sectictypeionionerREREctype html>
       --gold:#d6b15e;
       --line:rgba(255,255,255,.08);
       --wa:#25D366;
+      --call:#0a84ff;
       --mint:#46f3b4;
+      --cardA:rgba(255,255,255,.04);
+      --cardB:rgba(255,255,255,.02);
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       background: radial-gradient(1000px 600px at 50% -10%, rgba(214,177,94,.18), transparent 55%), var(--bg);
       color:#fff;
     }
+
+    /* Header */
     header{
-      position:sticky; top:0; z-index:5;
+      position:sticky; top:0; z-index:10;
       background:rgba(11,11,16,.88);
       backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
     }
     .wrap{max-width:1100px; margin:0 auto; padding:14px}
     .top{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      flex-wrap:wrap;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
     }
     .brand{
+      margin:0;
+      font-size:18px;
       font-weight:950;
       letter-spacing:.4px;
       color:var(--gold);
-      font-size:18px;
-      margin:0;
     }
     .search{flex:1; display:flex; justify-content:flex-end}
     .search input{
-      width:min(520px, 100%);
+      width:min(520px,100%);
       padding:12px 14px;
       border-radius:14px;
       border:1px solid var(--line);
@@ -50,19 +55,22 @@ sectictypeionionerREREctype html>
       outline:none;
     }
 
+    /* Cars */
     main{max-width:1100px; margin:0 auto; padding:14px}
     .grid{
       display:grid;
-      grid-template-columns:repeat(auto-fill, minmax(270px, 1fr));
+      grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
       gap:14px;
     }
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      background:linear-gradient(180deg,var(--cardA),var(--cardB));
       border:1px solid var(--line);
       border-radius:18px;
       overflow:hidden;
-      box-shadow: 0 16px 40px rgba(0,0,0,.45);
+      box-shadow:0 16px 40px rgba(0,0,0,.45);
+      transition:transform .18s ease;
     }
+    .card:hover{transform:translateY(-2px)}
     .img{
       width:100%;
       height:190px;
@@ -72,13 +80,8 @@ sectictypeionionerREREctype html>
     }
     .content{padding:12px 12px 14px}
     .title{margin:0 0 8px; font-weight:900; font-size:16px}
+    .price{margin:0 0 10px; font-weight:950; color:var(--mint); font-size:16px}
     .meta{margin:0 0 12px; color:var(--muted); font-size:12px; line-height:1.45}
-    .price{
-      margin:0 0 12px;
-      font-weight:950;
-      color:var(--mint);
-      font-size:16px;
-    }
     .btn{
       display:block;
       text-align:center;
@@ -99,167 +102,85 @@ sectictypeionionerREREctype html>
       color:var(--muted);
     }
 
-<style>
-    <footer>
+    /* Reviews slider */
+    .rev{padding:42px 14px}
+    .rev-wrap{max-width:1100px;margin:0 auto}
+    .rev-title{
+      margin:0 0 16px;
+      color:var(--gold);
+      font-size:18px;
+      font-weight:950;
+      letter-spacing:.3px;
+    }
+    .rev-box{
+      background:linear-gradient(180deg,var(--cardA),var(--cardB));
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 16px 40px rgba(0,0,0,.35);
+    }
+    .rev-track{
+      display:flex;
+      transition:transform .55s ease;
+      will-change:transform;
+    }
+    .rev-card{
+      min-width:100%;
+      padding:18px 18px 22px;
+    }
+    .rev-stars{color:var(--mint); font-weight:950; letter-spacing:2px; margin-bottom:10px}
+    .rev-text{margin:0 0 12px; opacity:.92; line-height:1.6; font-size:14px}
+    .rev-name{font-weight:950}
+    .rev-name span{color:var(--muted); font-weight:800}
+    .rev-dots{
+      display:flex; gap:8px; justify-content:center;
+      padding:12px 0 14px;
+      border-top:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+    }
+    .rev-dot{
+      width:10px;height:10px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.35);
+      background:transparent;
+      cursor:pointer;
+    }
+    .rev-dot.active{background:var(--gold); border-color:var(--gold)}
+
+    /* Floating buttons */
+    .float{
+      position:fixed;
+      right:16px;
+      width:56px;height:56px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      text-decoration:none;
+      font-size:26px;
+      box-shadow:0 10px 25px rgba(0,0,0,.35);
+      z-index:9999;
+    }
+    .float.wa{bottom:86px; background:var(--wa)}
+    .float.call{bottom:18px; background:var(--call)}
+
+    footer{
+      max-width:1100px; margin:0 auto;
+      padding:20px 14px 40px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+    }
   </style>
-  <!-- Floating buttons -->
+</head>
 
-<a href="https://wa.me/212653654229" class="whatsapp-float" target="_blank">
-💬
-</a>
-
-<a href="tel:+212653654229" class="call-float">
-📞
-</a>
-
-<style>
-
-.whatsapp-float{
-position:fixed;
-bottom:90px;
-right:20px;
-background:#25D366;
-color:white;
-font-size:28px;
-width:55px;
-height:55px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-text-decoration:none;
-box-shadow:0 6px 20px rgba(0,0,0,0.3);
-z-index:999;
-}
-
-.call-float{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#007bff;
-color:white;
-font-size:28px;
-width:55px;
-height:55px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-text-decoration:none;
-box-shadow:0 6px 20px rgba(0,0,0,0.3);
-z-index:999;
-}
-
-</style>
-  <section class="reviews-slider">
-
-<h2 class="reviews-title">Les avis de nos clients</h2>
-
-<div class="reviews-container">
-
-<div class="review-card">
-<div class="stars">★★★★★</div>
-<p>Service incroyable ! Voiture propre et luxueuse. Je recommande.</p>
-<span>Jean – Paris</span>
-</div>
-
-<div class="review-card">
-<div class="stars">★★★★★</div>
-<p>Très sérieux et professionnel. Réservation facile via WhatsApp.</p>
-<span>Sophie – Lyon</span>
-</div>
-
-<div class="review-card">
-<div class="stars">★★★★★</div>
-<p>Service VIP. Range Rover impeccable. Très satisfait.</p>
-<span>Karim – Casablanca</span>
-</div>
-
-<div class="review-card">
-<div class="stars">★★★★★</div>
-<p>خدمة ممتازة و سيارات فخمة. تجربة رائعة.</p>
-<span>Ahmed – Rabat</span>
-</div>
-
-</div>
-
-</section>
-
-<style>
-
-.reviews-slider{
-margin-top:60px;
-padding:40px 20px;
-text-align:center;
-}
-
-.reviews-title{
-color:#d6b15e;
-font-size:22px;
-margin-bottom:30px;
-}
-
-.reviews-container{
-display:flex;
-overflow:hidden;
-gap:20px;
-max-width:1000px;
-margin:auto;
-}
-
-.review-card{
-min-width:100%;
-background:#14141c;
-padding:25px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,0.5);
-}
-
-.review-card p{
-font-size:14px;
-margin:10px 0;
-}
-
-.review-card span{
-color:#aaa;
-font-size:13px;
-}
-
-.stars{
-color:#46f3b4;
-font-size:18px;
-}
-
-</style>
-
-<script>
-
-let index=0;
-
-function slideReviews(){
-
-const slider=document.querySelector(".reviews-container");
-
-index++;
-
-if(index>3){
-index=0;
-}
-
-slider.style.transform="translateX(-"+index*100+"%)";
-
-}
-
-setInterval(slideReviews,3000);
-
-</script>
-</body>
 <body>
+
 <header>
   <div class="wrap top">
     <h1 class="brand">Black Diamond Cars</h1>
     <div class="search">
-      <input id="q" placeholder="ابحث عن سيارة..." oninput="render()" />
+      <input id="q" placeholder="ابحث عن سيارة..." />
     </div>
   </div>
 </header>
@@ -268,15 +189,70 @@ setInterval(slideReviews,3000);
   <section id="grid" class="grid"></section>
 </main>
 
+<!-- Reviews slider -->
+<section class="rev">
+  <div class="rev-wrap">
+    <h2 class="rev-title">Les avis de nos clients</h2>
+
+    <div class="rev-box">
+      <div class="rev-track" id="revTrack">
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Service incroyable ! Voiture propre, luxueuse et livraison rapide. Je recommande.”</p>
+          <div class="rev-name">Jean D. <span>– Paris, France</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Très sérieux et professionnel. Réservation facile via WhatsApp, tout était parfait.”</p>
+          <div class="rev-name">Sophie M. <span>– Lyon, France</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Service VIP, Range Rover impeccable. Très bonne expérience, je reviendrai.”</p>
+          <div class="rev-name">Karim B. <span>– Casablanca, Maroc</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Communication ممتازة، تسليم فالوقت وسيارة نظيفة بزاف. شكراً بزاف.”</p>
+          <div class="rev-name">Ahmed L. <span>– Rabat, Maroc</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Super service, aucune surprise. Véhicule comme sur les photos. Top !”</p>
+          <div class="rev-name">Nadia R. <span>– Marseille, France</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“حجز ساهل بزاف، وخدمة محترمة. أنصح به لأي واحد باغي سيارات فخمة.”</p>
+          <div class="rev-name">Youssef A. <span>– Marrakech, Maroc</span></div>
+        </div>
+
+      </div>
+
+      <div class="rev-dots" id="revDots"></div>
+    </div>
+  </div>
+</section>
+
 <footer>
   للحجز عبر واتساب: 212653654229
 </footer>
 
+<!-- Floating WhatsApp + Call -->
+<a class="float wa" href="https://wa.me/212653654229" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+<a class="float call" href="tel:+212653654229" aria-label="Call">📞</a>
+
 <script>
+  // ===== Cars + WhatsApp message =====
   const WHATSAPP_NUMBER = "212653654229";
 
-  // ✅ (photo) تحيدات من الأسماء
-  // ✅ صور Macan و C-Class تبدلات بصور موجودة عندك في images/
+  // ✅ same file names from your /images list
   const cars = [
     { name:"Audi Q8 s line 50 TDI", mad:2500, img:"images/2019_audi_q8_uk_108_2560x1440.jpg", details:"SUV فخم — أوتوماتيك — ديزل", tags:["SUV","Luxury"] },
     { name:"Range Rover Sport P440e hybrid", mad:4000, img:"images/New Range Rover Sport 001_vyiis9.jpg", details:"Hybrid — SUV فخم — راحة عالية", tags:["Hybrid","VIP"] },
@@ -286,16 +262,12 @@ setInterval(slideReviews,3000);
     { name:"Mercedes Sprinter (avec chauffeur)", mad:3000, img:"images/chauffeur-driven-mercedes-benz-sprinter-pml-44-service-in-la-514-8353-m.jpg", details:"VIP نقل — مع سائق", tags:["Van","Driver"] },
     { name:"Mercedes Vito (avec chauffeur)", mad:2000, img:"images/Mercedes_Benz_Vito_BVA_2024_Luxury_Van_11_1746534680.jpg", details:"Van — مع سائق", tags:["Van","Driver"] },
     { name:"Mercedes Classe S 400", mad:6000, img:"images/Mercedes-Benz-S400d-2021-1600-1b.jpg", details:"Luxury — VIP", tags:["Sedan","VIP"] },
-
-    // ✅ بدّلنا Macan لملف "main_ext" لأنه غالباً خارجي (بدل صورة داخلية)
     { name:"Porsche Macan", mad:2500, img:"images/webp_mobile_listing_main_ext-3231303033.webp", details:"SUV رياضي — أوتوماتيك", tags:["SUV","Sport"] },
-
-    // ✅ بدّلنا C-Class لملف الصورة اللي كيبان فيها الطوموبيل فالطريق
     { name:"Mercedes C-Class AMG Line", mad:2000, img:"images/1_1772625185193.jpg", details:"AMG Line — Sedan", tags:["Sedan","AMG"] }
   ];
 
-  // ✅ رسالة الحجز بالفرنسية: غير الحجز + اسم السيارة
   function waLink(carName){
+    // French message: only reservation + car name
     const msg = `Bonjour, je voudrais réserver la voiture : ${carName}.`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   }
@@ -304,7 +276,7 @@ setInterval(slideReviews,3000);
     return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
 
-  function render(){
+  function renderCars(){
     const q = (document.getElementById("q").value || "").toLowerCase().trim();
     const grid = document.getElementById("grid");
     grid.innerHTML = "";
@@ -330,7 +302,62 @@ setInterval(slideReviews,3000);
       });
   }
 
-  render();
+  // ===== Reviews slider =====
+  function initReviews(){
+    const track = document.getElementById("revTrack");
+    const dotsWrap = document.getElementById("revDots");
+    if(!track || !dotsWrap) return;
+
+    const cards = Array.from(track.children);
+    let i = 0;
+    let timer = null;
+
+    // dots
+    cards.forEach((_, idx) => {
+      const b = document.createElement("button");
+      b.className = "rev-dot" + (idx === 0 ? " active" : "");
+      b.addEventListener("click", () => go(idx, true));
+      dotsWrap.appendChild(b);
+    });
+
+    function setActiveDot(idx){
+      Array.from(dotsWrap.children).forEach((d, di) => d.classList.toggle("active", di === idx));
+    }
+    function go(idx, restart){
+      i = (idx + cards.length) % cards.length;
+      track.style.transform = "translateX(" + (-i * 100) + "%)";
+      setActiveDot(i);
+      if(restart) start();
+    }
+    function start(){
+      if(timer) clearInterval(timer);
+      timer = setInterval(() => go(i+1, false), 3500);
+    }
+
+    // swipe on mobile
+    let downX = null;
+    track.addEventListener("touchstart", e => { downX = e.touches[0].clientX; }, {passive:true});
+    track.addEventListener("touchend", e => {
+      if(downX == null) return;
+      const upX = e.changedTouches[0].clientX;
+      const diff = upX - downX;
+      if(Math.abs(diff) > 35){
+        if(diff > 0) go(i-1, true);
+        else go(i+1, true);
+      } else start();
+      downX = null;
+    }, {passive:true});
+
+    start();
+  }
+
+  // init
+  window.addEventListener("DOMContentLoaded", () => {
+    renderCars();
+    document.getElementById("q").addEventListener("input", renderCars);
+    initReviews();
+  });
 </script>
+
 </body>
 </html>
