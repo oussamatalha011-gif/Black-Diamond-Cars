@@ -1,248 +1,187 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Black Diamond Cars</title>
 
-<title>Black Diamond Cars</title>
+  <style>
+    :root{
+      --bg:#0b0b10;
+      --muted:#b8b8c7;
+      --gold:#d6b15e;
+      --line:rgba(255,255,255,.08);
+      --wa:#25D366;
+      --mint:#46f3b4;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1000px 600px at 50% -10%, rgba(214,177,94,.18), transparent 55%), var(--bg);
+      color:#fff;
+    }
+    header{
+      position:sticky; top:0; z-index:5;
+      background:rgba(11,11,16,.88);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:14px}
+    .top{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      font-weight:950;
+      letter-spacing:.4px;
+      color:var(--gold);
+      font-size:18px;
+      margin:0;
+    }
+    .search{flex:1; display:flex; justify-content:flex-end}
+    .search input{
+      width:min(520px, 100%);
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      outline:none;
+    }
 
-<style>
-
-body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#0b0b0f;
-color:white;
-}
-
-header{
-background:#000;
-padding:20px;
-text-align:center;
-font-size:26px;
-font-weight:bold;
-color:#d6b15e;
-}
-
-.search{
-padding:15px;
-text-align:center;
-}
-
-.search input{
-width:80%;
-padding:12px;
-border-radius:10px;
-border:none;
-font-size:16px;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:15px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
-}
-
-.card{
-background:#14141c;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
-
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
-
-.content{
-padding:15px;
-}
-
-.title{
-font-size:18px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.price{
-color:#46f3b4;
-font-size:18px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.details{
-font-size:13px;
-color:#ccc;
-margin-bottom:15px;
-}
-
-.btn{
-display:block;
-background:#25D366;
-text-align:center;
-padding:12px;
-border-radius:10px;
-text-decoration:none;
-color:white;
-font-weight:bold;
-}
-
-footer{
-text-align:center;
-padding:25px;
-color:#aaa;
-font-size:13px;
-}
-
-</style>
+    main{max-width:1100px; margin:0 auto; padding:14px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(270px, 1fr));
+      gap:14px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,.45);
+    }
+    .img{
+      width:100%;
+      height:190px;
+      background:rgba(255,255,255,.06);
+      object-fit:cover;
+      display:block;
+    }
+    .content{padding:12px 12px 14px}
+    .title{margin:0 0 8px; font-weight:900; font-size:16px}
+    .meta{margin:0 0 12px; color:var(--muted); font-size:12px; line-height:1.45}
+    .price{
+      margin:0 0 12px;
+      font-weight:950;
+      color:var(--mint);
+      font-size:16px;
+    }
+    .btn{
+      display:block;
+      text-align:center;
+      padding:12px 10px;
+      border-radius:14px;
+      background:var(--wa);
+      color:#fff;
+      text-decoration:none;
+      font-weight:950;
+    }
+    .tagrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+    .tag{
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+    }
+    footer{
+      max-width:1100px; margin:0 auto; padding:26px 14px 40px;
+      color:var(--muted); font-size:12px; text-align:center;
+    }
+  </style>
 </head>
 
 <body>
-
 <header>
-Black Diamond Cars
+  <div class="wrap top">
+    <h1 class="brand">Black Diamond Cars</h1>
+    <div class="search">
+      <input id="q" placeholder="ابحث عن سيارة..." oninput="render()" />
+    </div>
+  </div>
 </header>
 
-<div class="search">
-<input type="text" id="search" placeholder="ابحث عن سيارة..." oninput="renderCars()">
-</div>
-
-<div class="container" id="cars"></div>
+<main>
+  <section id="grid" class="grid"></section>
+</main>
 
 <footer>
-WhatsApp: 212653654229
+  للحجز عبر واتساب: 212653654229
 </footer>
 
 <script>
+  const WHATSAPP_NUMBER = "212653654229";
 
-const WHATSAPP="212653654229";
+  // ✅ (photo) تحيدات من الأسماء
+  // ✅ صور Macan و C-Class تبدلات بصور موجودة عندك في images/
+  const cars = [
+    { name:"Audi Q8 s line 50 TDI", mad:2500, img:"images/2019_audi_q8_uk_108_2560x1440.jpg", details:"SUV فخم — أوتوماتيك — ديزل", tags:["SUV","Luxury"] },
+    { name:"Range Rover Sport P440e hybrid", mad:4000, img:"images/New Range Rover Sport 001_vyiis9.jpg", details:"Hybrid — SUV فخم — راحة عالية", tags:["Hybrid","VIP"] },
+    { name:"Porsche Cayenne coupé", mad:4000, img:"images/050757A5E50C4790BEF193EB374BE5B3_F8AE1EFF7CD94C7288646CF8C4091521_CY24J5LIX0011-cayenne-coupe-front.png", details:"Sport SUV — أوتوماتيك", tags:["SUV","Sport"] },
+    { name:"Volkswagen Touareg", mad:1200, img:"images/61-vw-touareg-front-cornering.jpg", details:"SUV — اقتصادي — أوتوماتيك", tags:["SUV","Comfort"] },
+    { name:"Range Rover Evoque", mad:1500, img:"images/2020-Range-Rover-Evoque-Navarik-Black-Color.png", details:"SUV — أنيق — أوتوماتيك", tags:["SUV","City"] },
+    { name:"Mercedes Sprinter (avec chauffeur)", mad:3000, img:"images/chauffeur-driven-mercedes-benz-sprinter-pml-44-service-in-la-514-8353-m.jpg", details:"VIP نقل — مع سائق", tags:["Van","Driver"] },
+    { name:"Mercedes Vito (avec chauffeur)", mad:2000, img:"images/Mercedes_Benz_Vito_BVA_2024_Luxury_Van_11_1746534680.jpg", details:"Van — مع سائق", tags:["Van","Driver"] },
+    { name:"Mercedes Classe S 400", mad:6000, img:"images/Mercedes-Benz-S400d-2021-1600-1b.jpg", details:"Luxury — VIP", tags:["Sedan","VIP"] },
 
-const cars=[
+    // ✅ بدّلنا Macan لملف "main_ext" لأنه غالباً خارجي (بدل صورة داخلية)
+    { name:"Porsche Macan", mad:2500, img:"images/webp_mobile_listing_main_ext-3231303033.webp", details:"SUV رياضي — أوتوماتيك", tags:["SUV","Sport"] },
 
-{
-name:"Audi Q8 s line 50 TDI",
-price:2500,
-img:"images/2019_audi_q8_uk_108_2560x1440.jpg",
-details:"SUV فخم — أوتوماتيك — ديزل"
-},
+    // ✅ بدّلنا C-Class لملف الصورة اللي كيبان فيها الطوموبيل فالطريق
+    { name:"Mercedes C-Class AMG Line", mad:2000, img:"images/1_1772625185193.jpg", details:"AMG Line — Sedan", tags:["Sedan","AMG"] }
+  ];
 
-{
-name:"Range Rover Sport P440e hybrid",
-price:4000,
-img:"images/New Range Rover Sport 001_vyiis9.jpg",
-details:"Hybrid — SUV فخم — راحة عالية"
-},
+  // ✅ رسالة الحجز بالفرنسية: غير الحجز + اسم السيارة
+  function waLink(carName){
+    const msg = `Bonjour, je voudrais réserver la voiture : ${carName}.`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  }
 
-{
-name:"Porsche Cayenne coupé",
-price:4000,
-img:"images/050757A5E50C4790BEF193EB374BE5B3_F8AE1EFF7CD94C7288646CF8C4091521_CY24J5LIX0011-cayenne-coupe-front.png",
-details:"Sport SUV — أوتوماتيك"
-},
+  function safeText(s){
+    return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
 
-{
-name:"Volkswagen Touareg",
-price:1200,
-img:"images/61-vw-touareg-front-cornering.jpg",
-details:"SUV — اقتصادي — أوتوماتيك"
-},
+  function render(){
+    const q = (document.getElementById("q").value || "").toLowerCase().trim();
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
 
-{
-name:"Range Rover Evoque",
-price:1500,
-img:"images/2020-Range-Rover-Evoque-Navarik-Black-Color.png",
-details:"SUV — أنيق — أوتوماتيك"
-},
+    cars
+      .filter(c => !q || c.name.toLowerCase().includes(q) || c.details.toLowerCase().includes(q))
+      .forEach(c => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <img class="img" src="${encodeURI(c.img)}" alt="${safeText(c.name)}" loading="lazy">
+          <div class="content">
+            <h3 class="title">${safeText(c.name)}</h3>
+            <p class="price">${c.mad} MAD / day</p>
+            <p class="meta">${safeText(c.details)}</p>
+            <a class="btn" href="${waLink(c.name)}" target="_blank" rel="noopener">Reserve now (WhatsApp)</a>
+            <div class="tagrow">
+              ${(c.tags||[]).map(t => `<span class="tag">${safeText(t)}</span>`).join("")}
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+  }
 
-{
-name:"Mercedes Sprinter (avec chauffeur)",
-price:3000,
-img:"images/chauffeur-driven-mercedes-benz-sprinter-pml-44-service-in-la-514-8353-m.jpg",
-details:"VIP نقل — مع سائق"
-},
-
-{
-name:"Mercedes Vito (avec chauffeur)",
-price:2000,
-img:"images/Mercedes_Benz_Vito_BVA_2024_Luxury_Van_11_1746534680.jpg",
-details:"Van — مع سائق"
-},
-
-{
-name:"Mercedes Classe S 400",
-price:6000,
-img:"images/Mercedes-Benz-S400d-2021-1600-1b.jpg",
-details:"Luxury — VIP"
-},
-
-{
-name:"Porsche Macan",
-price:2500,
-img:"images/macan_053.jpg",
-details:"SUV رياضي — أوتوماتيك"
-},
-
-{
-name:"Mercedes C-Class AMG Line",
-price:2000,
-img:"images/mercedes-benz-c-class-amg-line-front-720x405px.jpg",
-details:"AMG Line — Sedan"
-}
-
-];
-
-function renderCars(){
-
-const search=document.getElementById("search").value.toLowerCase();
-
-const container=document.getElementById("cars");
-
-container.innerHTML="";
-
-cars
-.filter(car=>car.name.toLowerCase().includes(search))
-.forEach(car=>{
-
-const card=document.createElement("div");
-
-card.className="card";
-
-card.innerHTML=`
-
-<img src="${encodeURI(car.img)}">
-
-<div class="content">
-
-<div class="title">${car.name}</div>
-
-<div class="price">${car.price} MAD / day</div>
-
-<div class="details">${car.details}</div>
-
-<a class="btn" target="_blank" href="https://wa.me/${WHATSAPP}?text=Salam bghit n7جز ${encodeURIComponent(car.name)}">
-Reserve now (WhatsApp)
-</a>
-
-</div>
-
-`;
-
-container.appendChild(card);
-
-});
-
-}
-
-renderCars();
-
+  render();
 </script>
-
 </body>
 </html>
