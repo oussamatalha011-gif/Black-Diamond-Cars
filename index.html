@@ -1,197 +1,226 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Black Diamond Cars</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Black Diamond Cars — كراء سيارات فاخرة</title>
 
-<style>
-body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#0f0f0f;
-color:white;
-}
+  <style>
+    :root{
+      --bg:#0b0b0f;
+      --card:#12121a;
+      --muted:#b8b8c7;
+      --gold:#d6b15e;
+      --line:rgba(255,255,255,.08);
+      --wa:#25D366;
+      --mint:#46f3b4;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1000px 600px at 50% -10%, rgba(214,177,94,.18), transparent 55%), var(--bg);
+      color:#fff;
+    }
+    header{
+      position:sticky; top:0; z-index:5;
+      background:rgba(11,11,15,.88);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:14px 14px}
+    .brand{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
+    }
+    .logo{display:flex; flex-direction:column; gap:4px}
+    .logo b{font-size:18px; letter-spacing:.4px; color:var(--gold)}
+    .logo span{font-size:12px; color:var(--muted)}
+    .search{flex:1; display:flex; justify-content:flex-end}
+    .search input{
+      width:min(520px, 100%);
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      outline:none;
+    }
+    .hint{
+      max-width:1100px; margin:0 auto;
+      padding:0 14px 12px;
+      color:var(--muted);
+      font-size:12px;
+    }
 
-header{
-text-align:center;
-padding:25px;
-font-size:28px;
-font-weight:bold;
-color:gold;
-background:black;
-}
-
-.subtitle{
-text-align:center;
-color:#ccc;
-margin-bottom:20px;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-}
-
-.card{
-background:#1a1a1a;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,0.7);
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.03);
-}
-
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
-
-.info{
-padding:15px;
-}
-
-.title{
-font-size:20px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.price{
-color:#00ffa2;
-font-size:18px;
-margin-bottom:15px;
-}
-
-.btn{
-display:block;
-text-align:center;
-padding:12px;
-background:#25D366;
-border-radius:8px;
-color:white;
-text-decoration:none;
-font-weight:bold;
-}
-
-footer{
-text-align:center;
-padding:20px;
-color:#aaa;
-font-size:14px;
-}
-</style>
-
+    main{max-width:1100px; margin:0 auto; padding:14px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(270px, 1fr));
+      gap:14px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,.45);
+      transition: transform .18s ease;
+    }
+    .card:hover{transform: translateY(-2px)}
+    .img{
+      width:100%;
+      height:190px;
+      background:rgba(255,255,255,.06);
+      object-fit:cover;
+      display:block;
+    }
+    .content{padding:12px 12px 14px}
+    .title{margin:0 0 6px; font-weight:900; font-size:16px}
+    .meta{margin:0 0 10px; color:var(--muted); font-size:12px; line-height:1.45}
+    .prices{
+      display:flex; gap:10px; align-items:baseline; flex-wrap:wrap;
+      margin:0 0 12px;
+    }
+    .mad{color:var(--mint); font-weight:900}
+    .eur{color:#fff; opacity:.9; font-weight:800}
+    .btn{
+      display:block;
+      text-align:center;
+      padding:12px 10px;
+      border-radius:14px;
+      background:var(--wa);
+      color:#fff;
+      text-decoration:none;
+      font-weight:950;
+    }
+    .tagrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+    .tag{
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+    }
+    footer{
+      max-width:1100px; margin:0 auto; padding:30px 14px 40px;
+      color:var(--muted); font-size:12px; text-align:center;
+    }
+  </style>
 </head>
 
 <body>
+<header>
+  <div class="wrap brand">
+    <div class="logo">
+      <b>Black Diamond Cars</b>
+      <span>Luxury Car Rental • Morocco</span>
+    </div>
 
-<header>Black Diamond Cars</header>
-<div class="subtitle">Luxury Car Rental • Casablanca</div>
-
-<div class="container">
-
-<div class="card">
-<img src="images/audi-q8.jpg">
-<div class="info">
-<div class="title">Audi Q8 S Line</div>
-<div class="price">2500 MAD / day</div>
-<a class="btn" href="https://wa.me/212653654229">Reserve on WhatsApp</a>
-</div>
-</div>
-
-<div class="card">
-<img src="images/rr-sport.jpg">
-<div class="info">
-<div class="title">Range Rover Sport</div>
-<div class="price">4000 MAD / day</div>
-<a class="btn" href="https://wa.me/212653654229">Reserve on WhatsApp</a>
-</div>
-</div>
-
-<div class="card">
-<img src="images/cayenne.jpg">
-<div class="info">
-<div class="title">Porsche Cayenne</div>
-<div class="price">4000 MAD / day</div>
-<a class="btn" href="https://wa.me/212653654229">Reserve on WhatsApp</a>
-</div>
-</div>
-
-<div class="card">
-<img src="images/touareg.jpg">
-<div class="info">
-<div class="title">Volkswagen Touareg</div>
-<div class="price">1200 MAD / day</div>
-<a class="btn" href="https://wa.me/212653654229">Reserve on WhatsApp</a>
-</div>
-</div>
-
-<div class="card">
-<img src="images/evoque.jpg">
-<div class="info">
-<div class="title">Range Rover Evoque</div>
-<div class="price">1500 MAD / day</div>
-<a class="btn" href="https://wa.me/212653654229">Reserve on WhatsApp</a>
-</div>
-</div>
-
-</div>
-
-<footer>
-Black Diamond Cars © 2026
-</footer>
-
-</body>
-</html>  </div>
+    <div class="search">
+      <input id="q" placeholder="ابحث: Audi, Porsche, Range Rover..." oninput="render()" />
+    </div>
+  </div>
+  <div class="hint">الأسعار بالدرهم واليورو (1€ = 10 MAD) — زر “Reserve now” يفتح واتساب برسالة جاهزة.</div>
 </header>
 
-<div class="wrap">
-  <div class="note">اضغط “Reserve now” وسيتم فتح واتساب برسالة جاهزة.</div>
-</div>
-
-<main class="wrap">
+<main>
   <section id="grid" class="grid"></section>
 </main>
 
+<footer>
+  © Black Diamond Cars — للحجز: WhatsApp 212653654229
+</footer>
+
 <script>
-  const WHATSAPP_NUMBER = "212653654229"; // رقمك بدون +
+  const WHATSAPP_NUMBER = "212653654229";
   const EUR_TO_MAD = 10;
 
+  // ✅ نفس أسماء الصور اللي عندك فـ images/
   const cars = [
-    {name:"Audi Q8 s line 50 TDI", eur:250, img:"images/audi-q8.jpg", details:"SUV فخم — أوتوماتيك — ديزل"},
-    {name:"Range Rover sport P440e hybrid", eur:400, img:"images/rr-sport.jpg", details:"Hybrid — SUV فخم — راحة عالية"},
-    {name:"Porsche Cayenne coupé", eur:400, img:"images/cayenne.jpg", details:"Sport SUV — أوتوماتيك"},
-    {name:"Porsche Cayenne coupé", eur:350, img:"images/cayenne-2.jpg", details:"نسخة أخرى — نفس الموديل"},
-    {name:"Volkswagen Touareg", eur:120, img:"images/touareg.jpg", details:"SUV — اقتصادي — أوتوماتيك"},
-    {name:"Range Rover Evoque", eur:150, img:"images/evoque.jpg", details:"SUV — أنيق — أوتوماتيك"},
-    {name:"Mercedes Sprinter (مع سائق)", eur:300, img:"images/sprinter.jpg", details:"Van — chauffeur included"},
-    {name:"Vito (مع سائق)", eur:200, img:"images/vito.jpg", details:"Van — chauffeur included"},
-    {name:"Mercedes Classe S 400", eur:600, img:"images/s400.jpg", details:"Luxury — VIP"},
-    {name:"Porsche Macan T", eur:250, img:"images/macan-t.jpg", details:"SUV رياضي — أوتوماتيك"},
-    {name:"Mercedes Classe C 220 Pack AMG", eur:200, img:"images/c220.jpg", details:"Sedan — AMG pack"},
-    {name:"Range Rover Vogue", eur:500, img:"images/vogue.jpg", details:"Luxury SUV — أوتوماتيك"},
-    {name:"Range Rover Vogue 2025", eur:500, img:"images/vogue-2025.jpg", details:"موديل جديد — VIP"},
-    {name:"Cupra 2025", eur:120, img:"images/cupra.jpg", details:"Sport — اقتصادي"},
-    {name:"Mercedes CLA 45 AMG", eur:350, img:"images/cla45.jpg", details:"AMG — رياضي"},
-    {name:"Mercedes Classe G63", eur:1100, img:"images/g63.jpg", details:"G-Class — VIP"},
-    {name:"Audi A3 s line 2023", eur:120, img:"images/a3-2023.jpg", details:"S line — اقتصادي"},
-    {name:"BMW Série 5 Pack M 2024", eur:220, img:"images/bmw5.jpg", details:"Pack M — راحة وفخامة"},
-    {name:"Audi A3 s line blue", eur:120, img:"images/a3-blue.jpg", details:"S line — لون أزرق"},
-    {name:"Porsche Macan S 380 CH", eur:300, img:"images/macan-s.jpg", details:"Macan S — قوي"}
+    {
+      name: "Audi Q8 s line 50 TDI",
+      eur: 250,
+      img: "images/2019_audi_q8_uk_108_2560x1440.jpg",
+      details: "SUV فخم — أوتوماتيك — ديزل",
+      tags: ["SUV","Luxury"]
+    },
+    {
+      name: "Range Rover Sport P440e hybrid",
+      eur: 400,
+      img: "images/New Range Rover Sport 001_yviis9.jpg",
+      details: "Hybrid — SUV فخم — راحة عالية",
+      tags: ["Hybrid","VIP"]
+    },
+    {
+      name: "Porsche Cayenne coupé",
+      eur: 400,
+      img: "images/050757A5E50C4790BEF193EB374BE5B3_F8AE1FEF7CD94C7288646CF8C4091521_CY24J5LIX0011-cayenne-coupe-front.png",
+      details: "Sport SUV — أوتوماتيك",
+      tags: ["Sport","SUV"]
+    },
+    {
+      name: "Volkswagen Touareg",
+      eur: 120,
+      img: "images/61-vw-touareg-front-cornering.jpg",
+      details: "SUV — اقتصادي — أوتوماتيك",
+      tags: ["SUV","Comfort"]
+    },
+    {
+      name: "Range Rover Evoque",
+      eur: 150,
+      img: "images/2020-Range-Rover-Evoque-Navarik-Black-Color.png",
+      details: "SUV — أنيق — أوتوماتيك",
+      tags: ["SUV","City"]
+    },
+    {
+      name: "Mercedes Sprinter (avec chauffeur)",
+      eur: 300,
+      img: "images/chauffeur-driven-mercedes-benz-sprinter-pml-44-service-in-la-514-8353-m.jpg",
+      details: "VIP نقل — مع سائق",
+      tags: ["Van","Driver"]
+    },
+    {
+      name: "Mercedes Vito (avec chauffeur)",
+      eur: 200,
+      img: "images/Mercedes_Benz_Vito_BVA_2024_Luxury_Van_11_1746534680.jpg",
+      details: "Van — مع سائق",
+      tags: ["Van","Driver"]
+    },
+    {
+      name: "Mercedes Classe S 400",
+      eur: 600,
+      img: "images/Mercedes-Benz-S400d-2021-1600-1b.jpg",
+      details: "Luxury — VIP",
+      tags: ["Sedan","VIP"]
+    },
+    {
+      name: "Porsche Macan (photo)",
+      eur: 250,
+      img: "images/macan_053.jpg",
+      details: "SUV رياضي — أوتوماتيك",
+      tags: ["Sport","SUV"]
+    },
+    {
+      name: "Mercedes C-Class AMG Line (photo)",
+      eur: 200,
+      img: "images/mercedes-benz-c-class-amg-line-front-720x405px.jpg",
+      details: "AMG Line — Sedan",
+      tags: ["AMG","Sedan"]
+    }
   ];
 
   function waLink(carName, eur, mad){
-    const text = `Salam, bghit n7جز: ${carName}%0AThمن: ${eur}€ (${mad} MAD) / jour%0ATarikh: `;
+    const text =
+      `Salam, bghit n7جز: ${carName}%0A` +
+      `Thمن: ${eur}€ (${mad} MAD) / jour%0A` +
+      `Tarikh: `;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+  }
+
+  function safeText(s){
+    return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
 
   function render(){
@@ -200,23 +229,35 @@ Black Diamond Cars © 2026
     grid.innerHTML = "";
 
     cars
-      .filter(c => !q || c.name.toLowerCase().includes(q))
+      .filter(c => !q || c.name.toLowerCase().includes(q) || c.details.toLowerCase().includes(q))
       .forEach(c => {
         const mad = c.eur * EUR_TO_MAD;
-        const card = document.createElement("div");
+
+        const card = document.createElement("article");
         card.className = "card";
         card.innerHTML = `
-          <img class="img" src="${c.img}" alt="${c.name}" onerror="this.style.display='none'">
+          <!-- encodeURI مهم باش المسافات فاسم الملف ما تسببش مشكل -->
+          <img class="img" src="${encodeURI(c.img)}" alt="${safeText(c.name)}" loading="lazy"
+               onerror="this.style.display='none'">
           <div class="content">
-            <p class="title">${c.name}</p>
-            <p class="price"><span class="eur">${c.eur}€ / day</span> <span class="mad">${mad} MAD / day</span></p>
-            <p class="details">${c.details}</p>
-            <a class="btn" href="${waLink(encodeURIComponent(c.name), c.eur, mad)}" target="_blank" rel="noopener">Reserve now (WhatsApp)</a>
+            <h3 class="title">${safeText(c.name)}</h3>
+            <p class="prices">
+              <span class="mad">${mad} MAD / day</span>
+              <span class="eur">${c.eur}€ / day</span>
+            </p>
+            <p class="meta">${safeText(c.details)}</p>
+            <a class="btn" href="${waLink(encodeURIComponent(c.name), c.eur, mad)}" target="_blank" rel="noopener">
+              Reserve now (WhatsApp)
+            </a>
+            <div class="tagrow">
+              ${(c.tags||[]).map(t => `<span class="tag">${safeText(t)}</span>`).join("")}
+            </div>
           </div>
         `;
         grid.appendChild(card);
       });
   }
+
   render();
 </script>
 </body>
