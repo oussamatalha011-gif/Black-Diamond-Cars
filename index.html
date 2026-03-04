@@ -98,6 +98,147 @@
       background:rgba(255,255,255,.03);
       color:var(--muted);
     }
+    <!-- Reviews Slider (put this BEFORE <footer>) -->
+<section class="rev">
+  <div class="rev-wrap">
+    <h2 class="rev-title">Les avis de nos clients</h2>
+
+    <div class="rev-box">
+      <div class="rev-track" id="revTrack">
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Service incroyable ! Voiture propre, luxueuse et livraison rapide. Je recommande.”</p>
+          <div class="rev-name">Jean D. <span>– Paris, France</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Très sérieux et professionnel. Réservation facile via WhatsApp, tout était parfait.”</p>
+          <div class="rev-name">Sophie M. <span>– Lyon, France</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Service VIP, Range Rover impeccable. Très bonne expérience, je reviendrai.”</p>
+          <div class="rev-name">Karim B. <span>– Casablanca, Maroc</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Communication ممتازة، تسليم فالوقت وسيارة نظيفة بزاف. شكراً بزاف.”</p>
+          <div class="rev-name">Ahmed L. <span>– Rabat, Maroc</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“Super service, aucune surprise. Véhicule comme sur les photos. Top !”</p>
+          <div class="rev-name">Nadia R. <span>– Marseille, France</span></div>
+        </div>
+
+        <div class="rev-card">
+          <div class="rev-stars">★★★★★</div>
+          <p class="rev-text">“حجز ساهل بزاف، وخدمة محترمة. أنصح به لأي واحد باغي سيارات فخمة.”</p>
+          <div class="rev-name">Youssef A. <span>– Marrakech, Maroc</span></div>
+        </div>
+
+      </div>
+
+      <div class="rev-dots" id="revDots"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rev{padding:48px 14px;}
+  .rev-wrap{max-width:1100px;margin:0 auto;}
+  .rev-title{margin:0 0 18px;color:#d6b15e;font-size:18px;font-weight:900;letter-spacing:.3px}
+  .rev-box{
+    background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 16px 40px rgba(0,0,0,.35);
+  }
+  .rev-track{
+    display:flex;
+    transition:transform .55s ease;
+    will-change:transform;
+  }
+  .rev-card{
+    min-width:100%;
+    padding:18px 18px 22px;
+  }
+  .rev-stars{color:#46f3b4;font-weight:900;letter-spacing:2px;margin-bottom:10px}
+  .rev-text{margin:0 0 12px;color:#fff;opacity:.92;line-height:1.6;font-size:14px}
+  .rev-name{font-weight:900}
+  .rev-name span{color:#b8b8c7;font-weight:700}
+
+  .rev-dots{
+    display:flex; gap:8px; justify-content:center;
+    padding:12px 0 14px; border-top:1px solid rgba(255,255,255,.08);
+    background:rgba(0,0,0,.25);
+  }
+  .rev-dot{
+    width:10px;height:10px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.35);
+    background:transparent; cursor:pointer;
+  }
+  .rev-dot.active{background:#d6b15e;border-color:#d6b15e}
+</style>
+
+<script>
+  (function(){
+    const track = document.getElementById("revTrack");
+    const cards = Array.from(track.children);
+    const dotsWrap = document.getElementById("revDots");
+    let i = 0;
+    let timer = null;
+
+    // create dots
+    cards.forEach((_, idx) => {
+      const b = document.createElement("button");
+      b.className = "rev-dot" + (idx === 0 ? " active" : "");
+      b.setAttribute("aria-label", "review " + (idx+1));
+      b.addEventListener("click", () => go(idx, true));
+      dotsWrap.appendChild(b);
+    });
+
+    function setActiveDot(idx){
+      Array.from(dotsWrap.children).forEach((d, di) => {
+        d.classList.toggle("active", di === idx);
+      });
+    }
+
+    function go(idx, restart){
+      i = (idx + cards.length) % cards.length;
+      track.style.transform = "translateX(" + (-i * 100) + "%)";
+      setActiveDot(i);
+      if(restart){ start(); }
+    }
+
+    function start(){
+      if(timer) clearInterval(timer);
+      timer = setInterval(() => go(i+1, false), 3500); // speed
+    }
+
+    // pause on touch/hover (mobile friendly)
+    let downX = null;
+    track.addEventListener("touchstart", e => { downX = e.touches[0].clientX; }, {passive:true});
+    track.addEventListener("touchend", e => {
+      if(downX == null) return;
+      const upX = e.changedTouches[0].clientX;
+      const diff = upX - downX;
+      if(Math.abs(diff) > 35){
+        if(diff > 0) go(i-1, true);
+        else go(i+1, true);
+      } else start();
+      downX = null;
+    }, {passive:true});
+
+    start();
+  })();
+</script>
     footer{
       max-width:1100px; margin:0 auto; padding:26px 14px 40px;
       color:var(--muted); font-size:12px; text-align:center;
